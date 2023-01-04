@@ -27,10 +27,8 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        path = "http://35.217.29.110/user/register/"
-        app.logger.warning("PATH: %s", path)
         response = requests.post(
-            url=path,
+            url=config["USER_DB"] + "/user/check_login",
             json={"name": username, "password": password},
             headers={'Content-type': 'application/json',
                      'Accept': 'text/plain'}
