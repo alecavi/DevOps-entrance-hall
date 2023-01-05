@@ -4,7 +4,7 @@ docker build -t entrance-hall .
 
 docker run \
 -d \
--p 81:80 \
+-p 80:80 \
 --name entrance-hall \
 --mount type=bind,source="$(pwd)/src",target="/home/src" \
 entrance-hall

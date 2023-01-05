@@ -24,24 +24,23 @@ def test():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
+    if request.method == "GET":
+        return render_template("login.html", error=None)
+    else:
         username = request.form["username"]
         password = request.form["password"]
         response = requests.post(
             url=config["USER_DB"] + "/user/check_login",
             json={"name": username, "password": password},
-            headers={'Content-type': 'application/json',
-                     'Accept': 'text/plain'}
         )
         if response.status_code == 200:
             session["logged_in"] = True
-        else:
-            app.logger.warning(
-                "STATUS_CODE: %s, URL: %s",
-                response.status_code, response.url
-            )
-
-    return render_template("login.html", error=None)
+            error = None
+        elif response.status_code == 401:
+            error = "Username and password don't match"
+        elif response.status_code == 404:
+            error = "No user \"{}\" exists".format(username)
+        return render_template("login.html", error=error)
 
 
 if __name__ == "__main__":
