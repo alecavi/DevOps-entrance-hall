@@ -76,7 +76,7 @@ def video():
     # Random recommended video:
     response = requests.get(
         config["VIDEO_INDEX"] + "/myflix/videos/_aggrs/sample-one")
-    video = response.json()[0]
+    video = response.json()[0]["video"]
     ip = video["ip"]
     file = video["file"]
     pic = video["pic"]
