@@ -13,19 +13,38 @@ app.secret_key = config["SECRET_KEY"]
 def root():
     if not session.get("logged_in", False):
         return redirect(url_for("login"))
+    # TODO: redirect user to their content page
 
 
-@app.route("/test")
-def test():
-    response = requests.post("http://example.org")
-    app.logger.warning("status: %s, url: %s",
-                       response.status_code, response.url)
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+    else:
+        username = request.form["username"]
+        password = request.form["password"]
+        response = requests.post(
+            url=config["USER_DB"] + "/user/register",
+            json={"name": username, "password": password},
+        )
+        if response.status_code == 200:
+            session["logged_in"] = True
+            error = None
+            # TODO: redirect user to their content page
+        elif response.status_code == 409:
+            error = "The username \"{}\" is already taken".format(username)
+        elif response.status_code == 422:
+            if not username:
+                error = "Username can't be empty"
+            elif len(password) < 8:
+                error = "Password must be at least 8 characters"
+        return render_template("register.html", error=error, username=username, password=password)
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        return render_template("login.html", error=None)
+        return render_template("login.html")
     else:
         username = request.form["username"]
         password = request.form["password"]
@@ -36,6 +55,7 @@ def login():
         if response.status_code == 200:
             session["logged_in"] = True
             error = None
+            # TODO: redirect user to their content page
         elif response.status_code == 401:
             error = "Username and password don't match"
         elif response.status_code == 404:
