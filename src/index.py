@@ -45,7 +45,8 @@ def login():
                 error = "Username can't be empty"
             elif len(password) < 8:
                 error = "Password must be at least 8 characters"
-        return render_template("login.html", error=error)
+
+        return render_template("login.html", error=error, username=username, password=password)
 
 
 if __name__ == "__main__":
