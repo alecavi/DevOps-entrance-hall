@@ -13,7 +13,7 @@ app.secret_key = config["SECRET_KEY"]
 def root():
     if session.get("username") is None:
         return redirect(url_for("login"))
-    # TODO: redirect user to their content page
+    return redirect(url_for("video"))
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -29,8 +29,7 @@ def register():
         )
         if response.status_code == 200:
             session["username"] = username
-            error = None
-            # TODO: redirect user to their content page
+            return redirect(url_for("video"))
         elif response.status_code == 409:
             error = "The username \"{}\" is already taken".format(username)
         elif response.status_code == 422:
@@ -54,8 +53,7 @@ def login():
         )
         if response.status_code == 200:
             session["username"] = username
-            error = None
-            # TODO: redirect user to their content page
+            return redirect(url_for("video"))
         elif response.status_code == 401:
             error = "Username and password don't match"
         elif response.status_code == 404:
