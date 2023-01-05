@@ -40,6 +40,11 @@ def login():
             error = "Username and password don't match"
         elif response.status_code == 404:
             error = "No user \"{}\" exists".format(username)
+        elif response.status_code == 422:
+            if not username:
+                error = "Username can't be empty"
+            elif len(password) < 8:
+                error = "Password must be at least 8 characters"
         return render_template("login.html", error=error)
 
 
