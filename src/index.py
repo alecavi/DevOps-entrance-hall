@@ -77,10 +77,10 @@ def video():
     response = requests.get(
         config["VIDEO_INDEX"] + "/myflix/videos/_aggrs/sample-one")
     video = response.json()[0]["video"]
-    ip = video["ip"]
-    file = video["file"]
-    pic = video["pic"]
-    return render_template("video.html", username=username, ip=ip, file=file, pic=pic)
+    return render_template(
+        "video.html",
+        username=username, ip=video["ip"], file=video["file"], pic=video["pic"], category=video["category"]
+    )
 
 
 if __name__ == "__main__":
