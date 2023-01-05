@@ -80,7 +80,7 @@ def video():
     return render_template(
         "video.html",
         username=username, ip=video["ip"], file=video["file"],
-        pic=video["pic"], title=video["title"], category=video["category"]
+        pic=video["pic"], title=video["Name"], category=video["category"]
     )
 
 
