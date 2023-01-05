@@ -19,7 +19,7 @@
             <h1>Register</h1>
             {% if error %}
             <div class="alert alert-danger">
-                <p class="error"><strong>Error:</strong> {{ error }}</p>
+                <p class="mb-0"><strong>Error:</strong> {{ error }}</p>
             </div>
             {% endif %}
             <form action={{ url_for("register") }} method="post">
