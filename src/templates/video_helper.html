@@ -1,5 +1,5 @@
 {% macro video(ip, pic, file, title, category) -%}
-<div class="card">
+<div class="card" style="width: 18rem;">
     <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px" controls preload="none"
         poster='http://{{ip}}/pics/{{pic}}' data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
         <source src="http://{{ip}}/mp4/{{file}}" type='video/mp4' />
