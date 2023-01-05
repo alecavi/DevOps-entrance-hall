@@ -11,7 +11,7 @@ app.secret_key = config["SECRET_KEY"]
 
 @app.route("/")
 def root():
-    if not session.get("logged_in", False):
+    if session.get("username") is None:
         return redirect(url_for("login"))
     # TODO: redirect user to their content page
 
@@ -28,7 +28,7 @@ def register():
             json={"name": username, "password": password},
         )
         if response.status_code == 200:
-            session["logged_in"] = True
+            session["username"] = username
             error = None
             # TODO: redirect user to their content page
         elif response.status_code == 409:
@@ -53,7 +53,7 @@ def login():
             json={"name": username, "password": password},
         )
         if response.status_code == 200:
-            session["logged_in"] = True
+            session["username"] = username
             error = None
             # TODO: redirect user to their content page
         elif response.status_code == 401:
@@ -67,6 +67,20 @@ def login():
                 error = "Password must be at least 8 characters"
 
         return render_template("login.html", error=error, username=username, password=password)
+
+
+@app.route("/video")
+def video():
+    username = session.get("username")
+    if username is None:
+        return redirect(url_for("login"))
+
+    # Random recommended video:
+    response = requests.get(
+        config["VIDEO_INDEX"] + "/myflix/videos/_aggrs/sample-one")
+    json = response.json()
+    app.logger.warning("JSON: %s", type(json))
+    return render_template("video.html", username=username, )
 
 
 if __name__ == "__main__":

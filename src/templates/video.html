@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>MyFlix video</title>
+</head>
+
+<body>
+    <h1>Welcome, {{ username }}</h1>
+
+    {% from "video_helper.html" import video %}
+    <h2>Suggested video:</h2>
+    {{ video(ip, pic, file) }}
+</body>
+
+</html>

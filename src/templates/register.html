@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="utf-8">
     <title>Register</title>
 </head>
 
@@ -13,8 +15,10 @@
             <dd><input type="text" name="username" {% if username %} value={{ username }} {% endif %}></dd>
             <dt>Password:</dt>
             <dd><input type="password" name="password" {% if password %} value={{ password }} {% endif %}></dd>
-            <dd><input type="submit" value="Login"></dd>
+            <dd><input type="submit" value="Register"></dd>
         </dl>
     </form>
     <p>Already have an account? <a href={{ url_for("login") }}>Login</a> instead</p>
 </body>
+
+</html>
