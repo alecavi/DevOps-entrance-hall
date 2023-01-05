@@ -79,7 +79,8 @@ def video():
     video = response.json()[0]["video"]
     return render_template(
         "video.html",
-        username=username, ip=video["ip"], file=video["file"], pic=video["pic"], category=video["category"]
+        username=username, ip=video["ip"], file=video["file"],
+        pic=video["pic"], title=video["title"], category=video["category"]
     )
 
 
