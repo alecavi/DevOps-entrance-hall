@@ -1,7 +1,7 @@
 {% macro video(data) -%}
 {% set video, like, watch_later = data["video"], data["like"], data["watch_later"] %}
 {% set ip, pic, file, title, category, uuid = video["ip"], video["pic"], video["file"], video["title"],
-video["category"], video["uuid"] }
+video["category"], video["uuid"] %}
 <div class="card" style="max-width: fit-content;">
     <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px" controls preload="none"
         poster='http://{{ip}}/pics/{{pic}}' data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
