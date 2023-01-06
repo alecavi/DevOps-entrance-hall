@@ -16,14 +16,14 @@ window.addEventListener("DOMContentLoaded", function () {
         store_button(like_buttons, button.dataset.uuid, button);
 
         button.addEventListener("change", async function () {
+            for (const button of like_buttons.get(this.dataset.uuid)) {
+                button.checked = this.checked;
+            }
             await fetch("http://35.217.17.201/api/like", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ state: this.checked, video_id: this.dataset.uuid })
             })
-            for (const button of like_buttons.get(this.dataset.uuid)) {
-                button.checked = this.checked;
-            }
         })
     }
 
@@ -31,14 +31,14 @@ window.addEventListener("DOMContentLoaded", function () {
         store_button(watch_later_buttons, button.dataset.uuid, button);
 
         button.addEventListener("change", async function () {
+            for (const button of watch_later_buttons.get(this.dataset.uuid)) {
+                button.checked = this.checked;
+            }
             await fetch("http://35.217.17.201/api/watch-later", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ state: this.checked, video_id: this.dataset.uuid })
             })
-            for (const button of watch_later_buttons.get(this.dataset.uuid)) {
-                button.checked = this.checked;
-            }
         })
     }
 })
