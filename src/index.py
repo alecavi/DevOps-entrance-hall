@@ -90,7 +90,7 @@ def video():
 
     # List of liked videos:
     liked_videos = requests.get(
-        VIDEO_INDEX + '?filter={"uuid": {"$in": {} }}'.format(likes)
+        VIDEO_INDEX + '?filter={{"uuid": {{"$in": {} }}'.format(likes)
     ).json()
 
     return render_template(
