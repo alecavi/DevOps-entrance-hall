@@ -2,12 +2,11 @@ from dotenv import dotenv_values
 from flask import Flask, render_template, session, redirect, url_for, request
 import requests
 
-import config
-from helpers import get_random_video, get_videos_by_uuid
+from config import VIDEO_INDEX, USER_DB, SECRET_KEY
 
 app = Flask(__name__)
 app.debug = True
-app.secret_key = config["SECRET_KEY"]
+app.secret_key = SECRET_KEY
 
 
 @app.route("/")
@@ -83,7 +82,9 @@ def video():
     watch_later = set(response["watch_later"])
 
     # Random recommended video:
-    recommended_video = get_random_video()
+    recommended_video = requests.get(
+        VIDEO_INDEX + "/_aggrs/sample-one"
+    ).json()[0]
     uuid = recommended_video["uuid"]
     recommended = {
         "video": recommended_video,
@@ -110,7 +111,7 @@ def like():
 
 
 @app.route("/api/watch-later", methods=["POST"])
-def like():
+def watch_later():
     json = request.json
     update = "add" if json["state"] else "remove"
     requests.put(
