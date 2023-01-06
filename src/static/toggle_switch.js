@@ -1,10 +1,10 @@
 window.addEventListener("DOMContentLoaded", (_) => {
     for (const button of document.getElementsByClassName("like-button")) {
         button.addEventListener("change", async function () {
-            await fetch("http://35.217.17.201/like", {
+            await fetch("http://35.217.17.201/api/like", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ state: this.checked, video: this.dataset.uuid })
+                body: JSON.stringify({ state: this.checked, video_id: this.dataset.uuid })
             })
         })
     }

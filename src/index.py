@@ -101,5 +101,15 @@ def video():
     )
 
 
+@app.route("/api/like", methods=["POST"])
+def like():
+    data = request.json()
+    update = "add" if data["state"] else "remove"
+    requests.put(
+        USER_DB + "{}/like{}".format(session["user_id"], data["video_id"]),
+        json='{{"update": {}}}'.format(update)
+    )
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
