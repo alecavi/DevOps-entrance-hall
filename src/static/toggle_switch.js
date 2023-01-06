@@ -19,6 +19,7 @@ window.addEventListener("DOMContentLoaded", (_) => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ state: this.checked, video_id: this.dataset.uuid })
             })
+            console.log("checked: ", this.checked);
             for (const button of buttons[this.dataset.uuid]) {
                 button.checked = this.checked;
             }
