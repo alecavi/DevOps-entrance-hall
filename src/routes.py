@@ -107,7 +107,8 @@ def video():
 
     # videos to watch later:
     watch_later = requests.get(
-        VIDEO_INDEX + '?filter={{"uuid": {{"$in": {}}}}}'.format(list(likes))
+        VIDEO_INDEX +
+        '?filter={{"uuid": {{"$in": {}}}}}'.format(list(watch_later))
     ).json()
     watch_later = list(map(
         lambda video: {
