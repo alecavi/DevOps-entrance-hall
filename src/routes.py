@@ -2,9 +2,8 @@ from dotenv import dotenv_values
 from flask import Flask, render_template, session, redirect, url_for, request
 import requests
 
-config = dotenv_values(".env")
-USER_DB = config["USER_DB"] + "/user"
-VIDEO_INDEX = config["VIDEO_INDEX"] + "/myflix/videos"
+import config
+from helpers import get_random_video, get_videos_by_uuid
 
 app = Flask(__name__)
 app.debug = True
@@ -76,28 +75,26 @@ def video():
     if username is None:
         return redirect(url_for("login"))
 
-    # Random recommended video:
-    recommended_video = requests.get(
-        VIDEO_INDEX + "/_aggrs/sample-one"
-    ).json()[0]
-
     # request liked and watch later
     response = requests.get(
         USER_DB + "/{}".format(session["user_id"])
     ).json()
-    likes = response["likes"]
-    watch_later = response["watch_later"]
+    likes = set(response["likes"])
+    watch_later = set(response["watch_later"])
 
-    # List of liked videos:
-    liked_videos = requests.get(
-        VIDEO_INDEX + '?filter={{"uuid": {{"$in": {} }}'.format(likes)
-    ).json()
+    # Random recommended video:
+    recommended_video = get_random_video()
+    uuid = recommended_video["uuid"]
+    recommended = {
+        "video": recommended_video,
+        "like": uuid in likes,
+        "watch_later": uuid in watch_later
+    }
 
     return render_template(
         "video.html",
         username=username,
-        recommended_video=recommended_video,
-        liked_videos=liked_videos  # TODO: update template to use this
+        recommended=recommended,
     )
 
 
@@ -107,6 +104,18 @@ def like():
     update = "add" if json["state"] else "remove"
     requests.put(
         USER_DB + "/{}/like/{}".format(session["user_id"], json["video_id"]),
+        json={"update": update}
+    )
+    return ('', 204)
+
+
+@app.route("/api/watch-later", methods=["POST"])
+def like():
+    json = request.json
+    update = "add" if json["state"] else "remove"
+    requests.put(
+        USER_DB +
+        "/{}/watch-later/{}".format(session["user_id"], json["video_id"]),
         json={"update": update}
     )
     return ('', 204)
