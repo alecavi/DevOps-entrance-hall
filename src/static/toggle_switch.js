@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", function () {
             })
             console.dir("checked: ", this.checked);
             console.dir("uuid: ", this.dataset.uuid);
-            console.dir("buttons", JSON.stringify(like_buttons));
+            console.dir("buttons", like_buttons);
             for (const button of like_buttons[this.dataset.uuid]) {
                 button.checked = this.checked;
             }
