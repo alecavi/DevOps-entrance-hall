@@ -1,4 +1,5 @@
 let like_buttons = new Map()
+let counter = 0;
 
 function store_like_button(key, value) {
     let list = like_buttons.get(key);
@@ -7,7 +8,7 @@ function store_like_button(key, value) {
     } else {
         list.push(value)
     }
-    console.log("store_button ", JSON.stringify(like_buttons));
+    console.log("store_button ", JSON.stringify(like_buttons), counter++);
 }
 
 window.addEventListener("DOMContentLoaded", function () {
