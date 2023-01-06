@@ -11,7 +11,7 @@ function store_button(key, value) {
 
 window.addEventListener("DOMContentLoaded", (_) => {
     for (const button of document.getElementsByClassName("like-button")) {
-        store_button(button.dataset.uuid, this);
+        store_button(button.dataset.uuid, button);
 
         button.addEventListener("change", async function () {
             await fetch("http://35.217.17.201/api/like", {
