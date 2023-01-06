@@ -103,10 +103,9 @@ def video():
 
 @app.route("/api/like", methods=["POST"])
 def like():
-    data = request.json()
-    update = "add" if data["state"] else "remove"
+    update = "add" if request["state"] else "remove"
     requests.put(
-        USER_DB + "{}/like{}".format(session["user_id"], data["video_id"]),
+        USER_DB + "{}/like{}".format(session["user_id"], request["video_id"]),
         json='{{"update": {}}}'.format(update)
     )
 
