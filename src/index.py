@@ -109,6 +109,7 @@ def like():
         USER_DB + "{}/like{}".format(session["user_id"], json["video_id"]),
         json='{{"update": {}}}'.format(update)
     )
+    return ('', 204)
 
 
 if __name__ == "__main__":
