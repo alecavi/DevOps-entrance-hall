@@ -42,5 +42,6 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         })
     }
-    console.log("layer one", buttons);
+    console.log("layer one", JSON.stringify(buttons));
 })
+console.log("layer zero", JSON.stringify(buttons));
