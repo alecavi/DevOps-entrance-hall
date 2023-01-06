@@ -89,13 +89,27 @@ def video():
     recommended = {
         "video": recommended_video,
         "like": uuid in likes,
-        "watch_later": uuid in watch_later
+        "watch_later": uuid in watch_later,
     }
+
+    # liked videos:
+    liked = requests.get(
+        VIDEO_INDEX + '?filter={"uuid": {"$in": {}}}'.format(list(likes))
+    ).json()
+    liked = map(
+        lambda video: {
+            "video": video,
+            "like": video["uuid"] in likes,
+            "watch_later": video["uuid"] in watch_later,
+        },
+        liked
+    )
 
     return render_template(
         "video.html",
         username=username,
         recommended=recommended,
+        liked=liked
     )
 
 

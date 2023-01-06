@@ -19,6 +19,15 @@
     {% from "video_helper.html" import video %}
     <h2>Suggested video:</h2>
     {{ video(recommended) }}
+
+    <div class="container-fluid py-2">
+        <h2>Liked videos:</h2>
+        <div class="d-flex flex-row flex-nowrap">
+            {% for l in liked %}
+            {{ video(l) }}
+            {% endfor %}
+        </div>
+    </div>
 </body>
 
 </html>
