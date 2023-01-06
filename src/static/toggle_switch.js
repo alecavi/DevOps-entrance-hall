@@ -1,3 +1,6 @@
+// FIXME: multiple toggles can refer to the same videos, since the same video can appear repeatedly. 
+// Ideally, those toggles should stay in sync
+
 window.addEventListener("DOMContentLoaded", (_) => {
     for (const button of document.getElementsByClassName("like-button")) {
         button.addEventListener("change", async function () {

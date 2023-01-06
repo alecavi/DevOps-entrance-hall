@@ -94,7 +94,7 @@ def video():
 
     # liked videos:
     liked = requests.get(
-        VIDEO_INDEX + '?filter={"uuid": {"$in": {}}}'.format(list(likes))
+        VIDEO_INDEX + '?filter={{"uuid": {{"$in": {}}}'.format(list(likes))
     ).json()
     liked = map(
         lambda video: {
