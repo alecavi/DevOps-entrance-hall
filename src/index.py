@@ -105,7 +105,7 @@ def video():
 def like():
     json = request.json
     update = "add" if json["state"] else "remove"
-    _json = '{{"update": {}}}'.format(update)
+    _json = '{{"update": "{}"}}'.format(update)
     app.logger.warning("JSON: %s", _json)
     requests.put(
         USER_DB + "/{}/like/{}".format(session["user_id"], json["video_id"]),
