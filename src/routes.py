@@ -106,6 +106,7 @@ def video():
         liked
     )
 
+    app.logger.warning("LIKED: %s", liked)
     return render_template(
         "video.html",
         username=username,
