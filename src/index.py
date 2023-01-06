@@ -3,6 +3,8 @@ from flask import Flask, render_template, session, redirect, url_for, request
 import requests
 
 config = dotenv_values(".env")
+USER_DB = config["USER_DB"] + "/user"
+VIDEO_INDEX = config["VIDEO_INDEX"] + "/myflix/videos"
 
 app = Flask(__name__)
 app.debug = True
@@ -24,7 +26,7 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         response = requests.post(
-            url=config["USER_DB"] + "/user/register",
+            url=USER_DB + "/register",
             json={"name": username, "password": password},
         )
         if response.status_code == 200:
@@ -48,11 +50,12 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         response = requests.post(
-            url=config["USER_DB"] + "/user/check_login",
+            url=USER_DB + "/check_login",
             json={"name": username, "password": password},
         )
         if response.status_code == 200:
             session["username"] = username
+            session["user_id"] = response.json()["id"]
             return redirect(url_for("video"))
         elif response.status_code == 401:
             error = "Username and password don't match"
@@ -74,9 +77,22 @@ def video():
         return redirect(url_for("login"))
 
     # Random recommended video:
+    recommended_video = requests.get(
+        config["VIDEO_INDEX"] + "/myflix/videos/_aggrs/sample-one"
+    ).json()[0]
+
+    # request liked and watch later
     response = requests.get(
-        config["VIDEO_INDEX"] + "/myflix/videos/_aggrs/sample-one")
-    video = response.json()[0]
+        config["USER_DB"] + "/user/{}".format(session["user_id"])
+    ).json()
+    likes = response["likes"]
+    watch_later = response["watch_later"]
+
+    # List of liked videos:
+    requests.get(
+        config
+    )
+
     return render_template(
         "video.html",
         username=username, ip=video["ip"], file=video["file"],
