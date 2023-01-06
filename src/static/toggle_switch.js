@@ -9,7 +9,7 @@ function store_button(key, value) {
     }
 }
 
-window.addEventListener("DOMContentLoaded", (_) => {
+window.addEventListener("DOMContentLoaded", function () {
     for (const button of document.getElementsByClassName("like-button")) {
         store_button(button.dataset.uuid, button);
 
@@ -42,5 +42,5 @@ window.addEventListener("DOMContentLoaded", (_) => {
             }
         })
     }
-
+    console.log("layer one", buttons);
 })
