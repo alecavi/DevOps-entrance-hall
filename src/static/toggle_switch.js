@@ -1,3 +1,4 @@
+console.log("RUNNING")
 for (const button of document.getElementsByClassName("like-button")) {
     console.log("ADDING", button)
     button.addEventListener("change", async function () {
