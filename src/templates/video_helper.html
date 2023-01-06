@@ -1,12 +1,13 @@
-{% macro video(ip, pic, file, title, category) -%}
+{% macro video(data) -%}
 <div class="card" style="max-width: fit-content;">
     <video id="my_video_1" class="video-js vjs-default-skin" width="640px" height="267px" controls preload="none"
-        poster='http://{{ip}}/pics/{{pic}}' data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
-        <source src="http://{{ip}}/mp4/{{file}}" type='video/mp4' />
+        poster='http://{{data["ip"]}}/pics/{{data["pic"]}}'
+        data-setup='{ "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2] }'>
+        <source src='http://{{data["ip"]}}/mp4/{{data["file"]}}' type='video/mp4' />
     </video>
-    <h5 class="card-title">{{ title }}</h5>
+    <h5 class="card-title">{{ data["title"] }}</h5>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Category: {{ category }}</li>
+        <li class="list-group-item">Category: {{ data["category"] }}</li>
     </ul>
 </div>
 {% endmacro %}

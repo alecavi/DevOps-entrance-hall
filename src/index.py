@@ -78,25 +78,25 @@ def video():
 
     # Random recommended video:
     recommended_video = requests.get(
-        config["VIDEO_INDEX"] + "/myflix/videos/_aggrs/sample-one"
+        VIDEO_INDEX + "/_aggrs/sample-one"
     ).json()[0]
 
     # request liked and watch later
     response = requests.get(
-        config["USER_DB"] + "/user/{}".format(session["user_id"])
+        USER_DB + "/{}".format(session["user_id"])
     ).json()
     likes = response["likes"]
     watch_later = response["watch_later"]
 
     # List of liked videos:
-    requests.get(
-        config
-    )
+    liked_videos = requests.get(
+        VIDEO_INDEX + '?filter={"uuid": {"$in": {} }}'.format(likes)
+    ).json()
 
     return render_template(
         "video.html",
-        username=username, ip=video["ip"], file=video["file"],
-        pic=video["pic"], title=video["Name"], category=video["category"]
+        recommended_video=recommended_video,
+        liked_videos=liked_videos  # TODO: update template to use this
     )
 
 
