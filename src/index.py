@@ -106,7 +106,7 @@ def like():
     json = request.json
     update = "add" if json["state"] else "remove"
     requests.put(
-        USER_DB + "{}/like{}".format(session["user_id"], json["video_id"]),
+        USER_DB + "/{}/like/{}".format(session["user_id"], json["video_id"]),
         json='{{"update": {}}}'.format(update)
     )
     return ('', 204)
