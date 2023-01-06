@@ -23,11 +23,24 @@
     <div class="container-fluid py-2">
         <h2>Liked videos:</h2>
         {% if not liked %}
-            <p>None yet</p>
+            <p>None</p>
         {% else %}
             <div class="d-flex flex-row flex-nowrap">
                 {% for l in liked %}
                     {{ video(l) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container-fluid py-2">
+        <h2>Watch later:</h2>
+        {% if not watch_later%}
+            <p>None</p>
+        {% else %}
+            <div class="d-flex flex-row flex-nowrap">
+                {% for w in watch_later%}
+                    {{ video(w) }}
                 {% endfor %}
             </div>
         {% endif %}
