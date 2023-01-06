@@ -7,6 +7,7 @@ function store_button(key, value) {
     } else {
         list.push(value)
     }
+    console.log("store_button ", JSON.stringify(buttons));
 }
 
 window.addEventListener("DOMContentLoaded", function () {
