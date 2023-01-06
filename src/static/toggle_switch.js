@@ -8,7 +8,7 @@ function store_like_button(key, value) {
     } else {
         list.push(value)
     }
-    console.dir("store_button ", stringify(like_buttons), counter++);
+    console.dir("store_button ", like_buttons, counter++);
 }
 
 window.addEventListener("DOMContentLoaded", function () {
