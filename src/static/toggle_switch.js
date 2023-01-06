@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", (_) => {
             })
             console.log("checked: ", this.checked);
             console.log("uuid: ", this.dataset.uuid);
-            console.log("buttons", buttons);
+            console.log("buttons", JSON.stringify(buttons));
             for (const button of buttons[this.dataset.uuid]) {
                 button.checked = this.checked;
             }
