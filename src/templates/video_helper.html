@@ -8,6 +8,15 @@
     <h5 class="card-title">{{ data["title"] }}</h5>
     <ul class="list-group list-group-flush">
         <li class="list-group-item">Category: {{ data["category"] }}</li>
+        <li class="list-group-item">
+            <div class="form-check form-switch">
+                <label class="form-check-label">
+                    <input class="form-check-input like-button" type="checkbox" role="switch" data-uuid={{ data["uuid"]
+                        }}>
+                    Like
+                </label>
+            </div>
+        </li>
     </ul>
 </div>
 {% endmacro %}
