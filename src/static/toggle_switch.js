@@ -1,4 +1,5 @@
-let like_buttons = new Map()
+let like_buttons = new Map();
+like_buttons.set("test", "tset");
 let counter = 0;
 
 function store_like_button(key, value) {
