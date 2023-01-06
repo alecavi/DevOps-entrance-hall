@@ -95,6 +95,7 @@ def video():
 
     return render_template(
         "video.html",
+        username=username,
         recommended_video=recommended_video,
         liked_videos=liked_videos  # TODO: update template to use this
     )
