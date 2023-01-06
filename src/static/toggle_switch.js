@@ -42,6 +42,6 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         })
     }
-    console.log("layer one", JSON.stringify(like_buttons));
+    console.dir("layer one", like_buttons);
 })
-console.log("layer zero", JSON.stringify(like_buttons));
+console.dir("layer zero", like_buttons);
