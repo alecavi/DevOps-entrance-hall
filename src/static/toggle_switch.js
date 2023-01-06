@@ -3,7 +3,7 @@ let buttons = new Map()
 function store_button(key, value) {
     let list = buttons.get(key);
     if (list === undefined) {
-        list = [value];
+        buttons.set(key, [value]);
     } else {
         list.push(value)
     }
