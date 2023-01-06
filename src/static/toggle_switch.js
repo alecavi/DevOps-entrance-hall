@@ -1,5 +1,4 @@
 let like_buttons = new Map();
-like_buttons.set("test", "tset");
 let counter = 0;
 
 function store_like_button(key, value) {
@@ -9,7 +8,7 @@ function store_like_button(key, value) {
     } else {
         list.push(value)
     }
-    console.log("store_button ", JSON.stringify(like_buttons), counter++);
+    console.dir("store_button ", stringify(like_buttons), counter++);
 }
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -22,9 +21,9 @@ window.addEventListener("DOMContentLoaded", function () {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ state: this.checked, video_id: this.dataset.uuid })
             })
-            console.log("checked: ", this.checked);
-            console.log("uuid: ", this.dataset.uuid);
-            console.log("buttons", JSON.stringify(like_buttons));
+            console.dir("checked: ", this.checked);
+            console.dir("uuid: ", this.dataset.uuid);
+            console.dir("buttons", JSON.stringify(like_buttons));
             for (const button of like_buttons[this.dataset.uuid]) {
                 button.checked = this.checked;
             }
