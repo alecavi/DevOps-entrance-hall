@@ -1,4 +1,4 @@
-for (const button of getElementsByClassName("like-button")) {
+for (const button of document.getElementsByClassName("like-button")) {
     button.addEventListener("change", async function () {
         await fetch("http://http://35.217.17.201/like", {
             method: "POST",
